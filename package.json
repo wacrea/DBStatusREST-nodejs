@@ -1,0 +1,13 @@
+{
+    "name": "DBStatusREST-nodejs",
+    "description": "A single REST API for checking the value of a MySQL db",
+    "author": "AGAY William <hello@williamagay.com>",
+    "dependencies": {
+      "mysql": "2.0.0-rc1",
+      "express": "3.4.7",
+      "validator": "2.0.0"
+  },
+    "engines": {
+      "node": "*"
+  }
+}
