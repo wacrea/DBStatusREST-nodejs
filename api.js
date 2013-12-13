@@ -23,17 +23,17 @@ var connection = mysql.createConnection({
 var app = express();
 
 /* Handle /getStatus and return a JSON with the status from the MySQL DB */
-app.get('/getStatus', function(req, res){
+app.get('/getStatus', function(request, response){
 
     // Get POST/GET parameters (we are looking for a user_id)
-    var url_parts = url.parse(req.url, true);
+    var url_parts = url.parse(request.url, true);
     var query = url_parts.query;
     console.log(query.user_id);
 
     // Init global variable that will contains the status
     global.resultdb;
 
-    /* Check if query.user_id is an int */
+    /* Check if query.user_id is an int & not null */
     try {
         check(query.user_id, 'This is not a user_id').notNull().isInt();
 
@@ -51,7 +51,10 @@ app.get('/getStatus', function(req, res){
         global.resultdb = 2;
     }
 
-    res.send('Result :'+global.resultdb);
+    /* Building response (JSON) */
+    var returnJSON = {};
+    returnJSON.returnStatusLogin = global.resultdb;
+    response.end(JSON.stringify(returnJSON));
 });
  
 // Begin listening
